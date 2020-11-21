@@ -7,7 +7,7 @@ Angular web frontend.
 The web-app needs a single configuration file in `src/assets/config/config.json`.
 An example of configuration is the following:
 
-``` json
+``` js
 {
     "baseUrl": "http://localhost:8001/api", //gateway entrypoint
     "peerjs": { //peerjs server configuration
