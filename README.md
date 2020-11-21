@@ -18,7 +18,7 @@ An Angular web-application with WebRTC capabilities. It's capable of rendering a
 
 ## Configuration
 
-The web-app can be configured with the file: `src/assets/config/config.json`. Here is an example of what can be configured:
+The web-app needs a single configuration file in `src/assets/config/config.json`. This is a configuration example:
 
 ``` js
 {
