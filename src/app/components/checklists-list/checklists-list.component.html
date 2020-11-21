@@ -1,0 +1,30 @@
+<div class="list-wrapper">
+    <div class="list-container">
+        <div class="spinner-container" *ngIf="loading">
+            <mat-progress-spinner mode="indeterminate" diameter="40"></mat-progress-spinner>       
+        </div>
+        <div class="no-results-container" *ngIf="!loading && data.length <= 0 && !error">
+            <p>No checklist found</p>
+        </div>
+        <div class="no-results-container" *ngIf="error">
+            <mat-error>{{ error }}</mat-error>
+        </div>
+        <mat-nav-list>
+            <mat-list-item *ngFor="let checklist of data; let idx = index;" [routerLink]="[checklist.id]">
+                <mat-icon matListIcon>list_alt</mat-icon>
+                <h3 matLine>Checklist #{{ pageIndex * pageSize + idx }} </h3>
+                <p matLine>{{ checklist.name }}</p>
+                <p matLine *ngIf="checklist.description">{{ checklist.description }}</p>
+            </mat-list-item>
+        </mat-nav-list>
+    </div>
+    <div class="paginator-container">
+        <mat-paginator fixed
+                    [length]="length"
+                    [pageIndex]="pageIndex"
+                    [pageSize]="pageSize"
+                    [pageSizeOptions]="[5, 10, 25]"
+                    (page)="pageEvent = $event; handlePageEvent($event)">
+        </mat-paginator>
+    </div>
+</div>

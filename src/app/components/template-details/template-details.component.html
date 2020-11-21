@@ -1,0 +1,29 @@
+<div class="details-container" *ngIf="templateInfo">
+    <div>
+        <h2>Template Information</h2>
+        <mat-list>
+            <mat-list-item><span class="bold-text">Name:</span><span>{{ templateInfo.name }}</span></mat-list-item>
+            <mat-list-item><span class="bold-text">Description:</span> {{ templateInfo.description }}</mat-list-item>
+            <mat-list-item><span class="bold-text">Author:</span> {{ authorInfo.firstName }} {{ authorInfo.lastName }} </mat-list-item>
+            <mat-list-item><span class="bold-text">Created at:</span> {{ templateInfo.createdAt | amDateFormat: 'LLLL' }}</mat-list-item>
+            <mat-list-item><span class="bold-text">Changed at:</span> {{ templateInfo.changedAt | amDateFormat: 'LLLL' }}</mat-list-item>
+        </mat-list>  
+    </div>
+    <mat-divider></mat-divider>
+    <div>
+        <h3>Phases:</h3>
+        <mat-card *ngFor="let phase of (checklists$ | async); let idx = index;" class="phase-card">
+            <mat-card-header>               
+                <mat-card-title>
+                    <span>{{phase.name}}</span>
+                    <div fxFlex></div>
+                    <span>#{{ idx + 1 }}</span>
+                </mat-card-title>
+                <mat-card-subtitle *ngIf="phase.description">{{ phase.description}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <button mat-button color="primary" [routerLink]="['/checklists/', phase.id]">Details</button>
+            </mat-card-content>    
+        </mat-card>
+    </div>    
+</div>

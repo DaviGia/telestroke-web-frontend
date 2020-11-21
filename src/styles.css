@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* enables mat-card header title to be rendered with multiple text at the opposite side of the card */
+.mat-card-header-text {
+    width: 100%;
+}

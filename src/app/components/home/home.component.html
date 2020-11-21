@@ -1,0 +1,71 @@
+<div>
+    <mat-card class="base-card">
+        <mat-card-header>
+            <div mat-card-avatar><mat-icon>supervised_user_circle</mat-icon></div>
+            <mat-card-title>Available operators</mat-card-title>
+            <div fxFlex></div>
+            <div class="operator-refresh-button">
+                <button mat-icon-button aria-label="Refresh operators" (click)="refreshOperators()">
+                    <mat-icon>refresh</mat-icon>
+                </button>
+            </div>
+        </mat-card-header>
+        <mat-card-content *ngIf="activeOperators.length > 0" class="available-operators-list">
+            <mat-nav-list>
+                <mat-divider [inset]="true" class="base-divider"></mat-divider>
+                <div *ngFor="let operator of activeOperators;">
+                    <mat-list-item (click)="beginSession(operator.id)">          
+                        <p matLine>{{ operator.user.firstName }} {{ operator.user.lastName }} | {{ operator.description }}</p>
+                        <mat-icon>call</mat-icon>       
+                    </mat-list-item>
+                    <mat-divider [inset]="true" class="base-divider"></mat-divider>
+                </div>
+            </mat-nav-list>      
+        </mat-card-content>
+        <mat-card-content *ngIf="activeOperators.length <= 0">
+            <p>No available operators found</p>       
+        </mat-card-content>
+    </mat-card>
+    <div class="secondary-card-container">
+        <div class="inline-card">
+            <mat-card class="base-card" *ngIf="user">
+                <mat-card-header>
+                    <div mat-card-avatar><mat-icon>account_circle</mat-icon></div>
+                    <mat-card-title>Account information</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-list>
+                        <mat-list-item>Username: {{ user.username }}</mat-list-item>
+                        <mat-divider [inset]="true" class="base-divider"></mat-divider>
+                        <mat-list-item>Email: {{ user.email }}</mat-list-item>
+                        <mat-divider [inset]="true" class="base-divider"></mat-divider>
+                        <mat-list-item>First name: {{ user.firstName }}</mat-list-item>
+                        <mat-divider [inset]="true" class="base-divider"></mat-divider>
+                        <mat-list-item>Last name: {{ user.lastName }}</mat-list-item>
+                      </mat-list>         
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="inline-card">
+            <mat-card class="base-card">
+                <mat-card-header>
+                    <div mat-card-avatar><mat-icon>bar_chart</mat-icon></div>
+                    <mat-card-title>Statistics</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-list *ngIf="!loading && !error">
+                        <mat-list-item>Templates count: {{ templates.length || '0' }}</mat-list-item>
+                        <mat-divider [inset]="true"></mat-divider>
+                        <mat-list-item>Checklists count: {{ checklists.length || '0' }}</mat-list-item>
+                        <mat-divider [inset]="true"></mat-divider>
+                        <mat-list-item>Sessions count: {{ sessions.length || '0' }}</mat-list-item>
+                        <mat-divider [inset]="true"></mat-divider>
+                        <mat-list-item>Active operators: {{ operators.length || '0' }}</mat-list-item>
+                    </mat-list> 
+                    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+                    <mat-error *ngIf="error">{{ error }}</mat-error>
+                </mat-card-content>
+            </mat-card>
+        </div>      
+    </div>
+</div>

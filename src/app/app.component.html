@@ -1,0 +1,24 @@
+<div class="root-container">
+  <mat-toolbar color="primary" class="toolbar" *ngIf="toolbarVisible">
+    <button mat-icon-button (click)="sidenav.toggle()" *ngIf="(user | async)"><mat-icon>menu</mat-icon></button>
+    <h1 class="app-name">Telestroke</h1>
+    <span class="toolbar-spacer"></span>
+    <h6 *ngIf="(user | async) as account;">{{ account.username }}</h6>
+    <button mat-icon-button (click)="logout()" *ngIf="(user | async)"><mat-icon>exit_to_app</mat-icon></button>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav>
+      <mat-nav-list>
+        <a mat-list-item routerLink="." (click)="sidenav.toggle()"><mat-icon class="sidenav-elem-icon">home</mat-icon>Home</a>
+        <a mat-list-item routerLink="/session/create" (click)="sidenav.toggle()"><mat-icon class="sidenav-elem-icon">add_circle</mat-icon>New session</a>
+        <a mat-list-item routerLink="/sessions" (click)="sidenav.toggle()"><mat-icon class="sidenav-elem-icon">list</mat-icon>Sessions</a>
+        <a mat-list-item routerLink="/checklists" (click)="sidenav.toggle()"><mat-icon class="sidenav-elem-icon"> format_list_bulleted</mat-icon>Checklists</a>
+        <a mat-list-item routerLink="/templates" (click)="sidenav.toggle()"><mat-icon class="sidenav-elem-icon">developer_board</mat-icon>Templates</a>
+        <a mat-list-item routerLink="/operators" (click)="sidenav.toggle()"><mat-icon class="sidenav-elem-icon">supervisor_account</mat-icon>Operators</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    
+    <router-outlet></router-outlet>
+  </mat-sidenav-container>
+</div>

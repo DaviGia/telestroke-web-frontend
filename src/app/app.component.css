@@ -1,0 +1,18 @@
+.root-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.sidenav-container {
+  flex: 1;
+ }
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.sidenav-elem-icon {
+  margin-right: 10px;
+}

@@ -1,0 +1,35 @@
+<div class="list-wrapper">
+    <div class="list-container">
+        <div class="spinner-container" *ngIf="loading">
+            <mat-progress-spinner mode="indeterminate" diameter="40"></mat-progress-spinner>       
+        </div>
+        <div class="no-results-container" *ngIf="!loading && data.length <= 0 && !error">
+            <p>No session found</p>
+        </div>
+        <div class="no-results-container" *ngIf="error">
+            <mat-error>{{ error }}</mat-error>
+        </div>
+        <mat-nav-list>
+            <mat-list-item *ngFor="let session of data; let idx = index;" [routerLink]="[session.id]">
+                <mat-icon matListIcon *ngIf="session.endDate">assignment_turned_in</mat-icon>
+                <mat-icon matListIcon *ngIf="!session.endDate">assignment</mat-icon>
+                <h3 matLine>Session #{{ pageIndex * pageSize + idx }} </h3>
+                <p matLine>Specialist: {{ session.specialist.firstName }} {{ session.specialist.lastName }}</p>
+                <p matLine>Operator: {{ session.operator.firstName }} {{ session.operator.lastName }}</p>
+                <p matLine>
+                    <span>{{ session.startDate | amDateFormat: 'LLLL' }}</span>
+                    <span> -- {{(session.endDate | amDateFormat: 'LLLL') || 'In progress' }}</span>
+                </p>
+            </mat-list-item>
+        </mat-nav-list>
+    </div>
+    <div class="paginator-container">
+        <mat-paginator fixed
+                    [length]="length"
+                    [pageIndex]="pageIndex"
+                    [pageSize]="pageSize"
+                    [pageSizeOptions]="[5, 10, 25]"
+                    (page)="pageEvent = $event; handlePageEvent($event)">
+        </mat-paginator>
+    </div>
+</div>

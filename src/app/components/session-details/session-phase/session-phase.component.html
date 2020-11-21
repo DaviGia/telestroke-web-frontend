@@ -1,0 +1,66 @@
+<mat-expansion-panel *ngIf="phase && loaded" class="expansion-panel">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{ phase.checklist.name }}
+        </mat-panel-title>
+        <mat-panel-description *ngIf="phase.checklist.description">
+            {{ phase.checklist.description }}
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <h4>Performed actions:</h4>
+
+    <span *ngIf="phase.actions.length <= 0">No action performed yet</span>
+    <mat-card *ngFor="let action of phase.actions; let idx = index;" class="action-card">
+        <mat-card-header>
+            <mat-card-title>
+                <span>{{ action.step.name }}</span>
+                <div fxFlex></div>
+                <span>#{{ idx + 1 }}</span>        
+            </mat-card-title>
+            <mat-card-subtitle *ngIf="action.step.description">{{ action.step.description }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list [ngSwitch]="action.type">
+                <mat-list-item>
+                    <span>{{action.field.name}}</span>
+                    <div fxFlex></div>
+                    <small class="action-field-description" *ngIf="action.field.description">{{ action.field.description }}</small>
+                </mat-list-item>
+                <mat-divider [inset]="true"></mat-divider>
+                <div *ngSwitchCase="'value'" [ngSwitch]="action.valueType">
+                    <mat-list-item *ngSwitchCase="'text'">{{ action.value }}</mat-list-item>
+                    <mat-list-item *ngSwitchCase="'multiline-text'">{{ action.value }}</mat-list-item>
+                    <mat-list-item *ngSwitchCase="'number'">{{ action.value }}</mat-list-item>
+                    <mat-list-item *ngSwitchCase="'datetime'">{{ action.value | amParse: 'x' | amDateFormat: 'LLLL' }}</mat-list-item> 
+                </div>
+                <div *ngSwitchCase="'select'">
+                    <mat-list-item>
+                        {{ action.value }}
+                        <div fxFlex></div>
+                        <span class="field-value-description">{{ getValueDescription(action) }}</span>
+                    </mat-list-item>
+                </div>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+
+    <div class="results-container" *ngIf="phase.results.length > 0">
+        <h4>Results:</h4>
+
+        <mat-card *ngFor="let result of phase.results;" class="action-card">
+            <mat-card-header>
+                <mat-card-title>
+                    <span>{{ result.name }}</span>        
+                </mat-card-title>
+                <mat-card-subtitle *ngIf="result.description">{{ result.description }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-list>
+                    <mat-divider [inset]="true"></mat-divider>
+                    <mat-list-item>{{ formatResultValue(result) }}</mat-list-item>
+                </mat-list>
+            </mat-card-content>
+        </mat-card>
+    </div>  
+</mat-expansion-panel>

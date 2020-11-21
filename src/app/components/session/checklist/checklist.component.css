@@ -1,0 +1,85 @@
+/* all step fields should be in the same row */
+.checklist-container {
+    width: 100%; /* fill all available space */
+}
+
+.checklist-steps-container {
+    display: flex;
+    width: 100%; /* fill all available space */
+}
+
+.step-field-container {
+    width: 100%; /* fill all available space */
+}
+
+.value-input-container {
+    width: 100%; /* fill all available space */
+    flex-grow: 1; /* grow together */
+}
+
+.select-input-container {
+    width: 100%; /* fill all available space */
+    flex-direction: column; /* content must be in columns */
+    flex-grow: 1; /* grow together */
+}
+
+/* all step fields should be in the same row */
+@media screen and (max-width: 1500px) {
+    .checklist-steps-container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+}
+
+
+/* all step fields should be in the same row */
+@media screen and (max-width: 1100px) {
+    .checklist-steps-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+}
+
+/* all step fields should be in the same row */
+@media screen and (max-width: 850px) {
+    .checklist-steps-container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+}
+
+/* others */
+.vertical-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+}
+
+.value-radio-button {
+    margin: 5px;
+}
+
+.radio-button-content-width-limit {
+    white-space: normal;
+}
+
+.checklist-subtitle {
+    margin: 0 25px;
+}
+
+.field-subtitle {
+    margin-top: 4px;
+    font-size: 0.8em;
+}
+
+.field-hint {
+    margin-bottom: 8px;
+}
+
+.results-container {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,24 @@
+.inner-card {
+    margin: 10px;
+}
+
+.expansion-panel {
+    margin-top: 10px;
+}
+
+.accepted-values-table {
+    width: 100%;
+}
+
+.space-filler {
+    flex: 1 1 auto;
+ }
+
+ .bold-text {
+    font-weight: 500;
+    margin-right: 20px;
+}
+
+.optional-span-margin {
+    margin-left: 5px;
+}

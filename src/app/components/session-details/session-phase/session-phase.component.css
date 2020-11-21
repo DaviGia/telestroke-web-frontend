@@ -1,0 +1,23 @@
+.action-card {
+    margin: 10px;
+}
+
+.expansion-panel {
+    margin: 10px 0;
+}
+
+.action-field-description {
+    margin-left: 10px;
+}
+
+.field-value-description {
+    padding-left: 10px;
+}
+
+@media (max-width: 800px) {
+    .field-value-description {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

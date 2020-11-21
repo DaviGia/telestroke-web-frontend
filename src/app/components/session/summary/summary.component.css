@@ -1,0 +1,28 @@
+.global-progress-bar {
+    margin: 0 10px;
+}
+
+.checklists-progress-table-container {
+    margin: 10px;
+}
+
+.checklists-progress-table {
+    width: 100%;
+    padding: 0 10px;
+}
+
+.progress-cell {
+    display: inline-flex;
+    flex-direction: row;
+}
+
+.close-button-container {
+    margin: 15px;
+    display: flex;
+}
+
+.close-button-container button,
+.close-button-container a {
+  margin-right: 8px;
+  min-width: 100px;
+}

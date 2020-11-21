@@ -1,0 +1,48 @@
+<div class="checklist-container">
+    <div class="checklist-subtitle">
+        <p>{{ checklist.description }}</p>
+        <div fxFlex></div>
+        <div class="results-container">
+        <p *ngFor="let result of results | async;">{{ result }}</p>
+        </div>
+    </div>
+    <mat-vertical-stepper  #stepper [linear]="linearMode" (selectionChange)="selectionChanged($event)">
+        <mat-step *ngFor="let step of checklist.steps; let idx = index; let first = first; let last = last;" [stepControl]="formGroups[idx]" [optional]="false">
+            <form [formGroup]="formGroups[idx]">
+                <!-- header -->
+                <ng-template matStepLabel>
+                    {{ step.name }} <br/>
+                    <small *ngIf="step.description">{{ step.description }}</small>
+                </ng-template>
+                
+                <!-- steps -->
+                <div class="checklist-steps-container">
+                    <div *ngFor="let field of step.fields;" [ngSwitch]="field.type" class="step-field-container">   
+                        <mat-form-field *ngSwitchCase="'value'" class="value-input-container">
+                            <mat-label>{{ field.name }}</mat-label>
+                            <input *ngIf="field.constraints.valueType.toString() !== 'multiline-text'" matInput [formControlName]="field.id" [type]="getInputType(field)">
+                            <textarea *ngIf="field.constraints.valueType.toString() === 'multiline-text'" matInput [formControlName]="field.id"></textarea>
+                            <mat-hint *ngIf="field.description" class="field-hint">{{ field.description }}</mat-hint>
+                        </mat-form-field>
+                        <div *ngSwitchCase="'select'" class="select-input-container">
+                            <mat-label>{{ field.name }}</mat-label>
+                            <p *ngIf="field.description" class="field-subtitle">{{ field.description }}</p>
+                            <mat-radio-group matInput class="vertical-radio-group" [formControlName]="field.id">
+                                <mat-radio-button class="value-radio-button" *ngFor="let item of field.values;" [value]="item.value">
+                                <span class="radio-button-content-width-limit">{{ item.name }}</span>
+                                </mat-radio-button>    
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- buttons -->
+                <div>
+                    <button *ngIf="!first" mat-button matStepperPrevious>Back</button>
+                    <button *ngIf="!last" mat-button matStepperNext>Next</button>
+                    <button *ngIf="last" mat-button matStepperNext (click)="continueClicked()">Continue</button>
+                </div>
+            </form>
+        </mat-step>
+    </mat-vertical-stepper>
+</div>

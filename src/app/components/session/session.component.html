@@ -1,0 +1,20 @@
+<div class="session-container">
+    <div class="template-container" [ngClass]="{ 'template-container-extended': disableVideo }">
+        <mat-tab-group #tabGroup>
+            <mat-tab *ngFor="let checklist of checklists; let idx = index; let first = first;" [label]="checklist.name" [disabled]="disabledTabs[idx]">
+                <app-checklist [checklist]="checklist" [timer]="elapsedTime" [actions]="actions"
+                    (onChecklistCompleted)="enableNextChecklist(idx)" (onActionDone)="saveAction($event)">
+                </app-checklist>
+            </mat-tab>
+            <mat-tab [label]="'Summary'" *ngIf="loadingCompleted">
+                <app-summary *ngIf="loadingCompleted" [session]="session" [checklists]="checklists" [actionEvent]="actionEvent.asObservable()"
+                            [actions]="actions" [timer]="elapsedTime" (onCloseButtonPressed)="closeSession($event)"></app-summary>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    <div class="remote-video-container" *ngIf="!disableVideo">
+        <video #remoteVideo controls autoplay>
+            Not supported
+        </video>
+    </div>
+</div>

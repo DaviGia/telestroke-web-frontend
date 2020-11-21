@@ -1,0 +1,30 @@
+<div class="list-wrapper">
+    <div class="list-container">
+        <div class="spinner-container" *ngIf="loading">
+            <mat-progress-spinner mode="indeterminate" diameter="40"></mat-progress-spinner>   
+        </div>
+        <div class="no-results-container" *ngIf="!loading && data.length <= 0 && !error">
+            <p>No template found</p>
+        </div>
+        <div class="no-results-container" *ngIf="error">
+            <mat-error>{{ error }}</mat-error>
+        </div>
+        <mat-nav-list>
+            <mat-list-item *ngFor="let template of data; let idx = index;" [routerLink]="[template.id]">
+                <mat-icon matListIcon>view_quilt</mat-icon>
+                <h3 matLine> Template #{{ pageIndex * pageSize + idx }} </h3>
+                <p matLine>{{ template.name }}</p>
+                <p matLine *ngIf="template.description">{{ template.description }}</p>
+            </mat-list-item>
+        </mat-nav-list>
+    </div>
+    <div class="paginator-container">
+        <mat-paginator fixed
+                    [length]="length"
+                    [pageIndex]="pageIndex"
+                    [pageSize]="pageSize"
+                    [pageSizeOptions]="[5, 10, 25]"
+                    (page)="pageEvent = $event; handlePageEvent($event)">
+        </mat-paginator>
+    </div>
+</div>

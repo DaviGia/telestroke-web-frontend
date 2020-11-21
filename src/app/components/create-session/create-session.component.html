@@ -1,0 +1,40 @@
+<div class="create-session-container">
+  <h2>Create session</h2>
+  <form [formGroup]="form" class="create-session-form">
+    <mat-form-field class="full-width-form-field">
+      <mat-label>Specialist</mat-label>
+      <input matInput formControlName="specialist">
+    </mat-form-field>
+  
+    <mat-form-field class="full-width-form-field">
+      <mat-label>Operator</mat-label>
+      <mat-select formControlName="peerId" required>
+        <mat-option *ngFor="let operator of (operators$ | async)" [value]="operator.id">
+          {{ operator.user.firstName }} {{ operator.user.lastName }} ({{ operator.description }})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="full-width-form-field">
+      <mat-label>Template</mat-label>
+      <mat-select formControlName="template" required>
+        <mat-option *ngFor="let template of (templates$ | async)" [value]="template.id">
+          {{ template.name }} ({{ template.description }})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="error" class="error-container">
+      <mat-error>
+        {{error}}
+      </mat-error>
+    </div>
+
+    <div fxLayout="row wrap">
+      <button mat-raised-button (click)="onSubmit()" color="primary">Create</button>
+      <div fxFlex></div>
+      <mat-spinner *ngIf="loading" [diameter]="35" class="loading-spinner"></mat-spinner>
+    </div>
+  </form>
+</div>
+  

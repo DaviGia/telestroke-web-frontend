@@ -1,0 +1,22 @@
+<div class="information-container" *ngIf="checklist">
+    <div>
+        <h2>Checklist Information</h2>
+        <mat-list>
+            <mat-list-item><span class="bold-text">Name: </span>{{ checklist.name }}</mat-list-item>
+            <mat-list-item><span class="bold-text">Description: </span>{{ checklist.description }}</mat-list-item>
+            <mat-list-item><span class="bold-text">Author:</span> {{ authorInfo.firstName }} {{ authorInfo.lastName }}</mat-list-item>
+            <mat-list-item><span class="bold-text">Created at:</span> {{ checklist.createdAt | amDateFormat: 'LLLL' }}</mat-list-item>
+            <mat-list-item><span class="bold-text">Changed at:</span> {{ checklist.changedAt | amDateFormat: 'LLLL' }}</mat-list-item>        
+        </mat-list>  
+    </div>
+    <mat-divider></mat-divider>
+    <div class="details-container">
+        <h3>Steps:</h3>
+        <span *ngIf="checklist.steps.length <= 0">No steps declared</span>
+        <app-checklist-step *ngFor="let step of checklist.steps" [step]="step">
+        </app-checklist-step>
+        <h3>Results:</h3>
+        <span *ngIf="checklist.results.length <= 0">No results declared</span>
+        <app-checklist-result [checklist]="checklist"></app-checklist-result>
+    </div>    
+</div>

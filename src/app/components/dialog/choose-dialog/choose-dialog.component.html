@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+
+<mat-dialog-content class="dialog-content-container">
+  <p>{{ message }}</p>
+  <mat-form-field class="select-container">
+    <mat-label>{{ label }}</mat-label>
+    <mat-select [formControl]="selectFormControl" required>
+      <mat-option *ngFor="let item of items;" [value]="item.value">{{ item.label }}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="selectFormControl.hasError('required')">Please choose an operator</mat-error>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button (click)="deny()" tabindex="-1">Cancel</button>
+  <button mat-raised-button color="primary" (click)="confirm()">Ok</button>
+</mat-dialog-actions>

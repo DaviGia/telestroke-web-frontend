@@ -1,0 +1,21 @@
+<div class="details-container" *ngIf="sessionInfo">
+    <div>
+        <h2>Session Information</h2>    
+        <mat-list>
+            <mat-list-item><span class="bold-text">Template:</span><span>{{ sessionInfo.template.name }}</span></mat-list-item>
+            <mat-list-item><span class="bold-text">Specialist:</span> {{ sessionInfo.specialist.firstName }} {{ sessionInfo.specialist.lastName }}</mat-list-item>
+            <mat-list-item><span class="bold-text">Operator:</span> {{ sessionInfo.operator.firstName }} {{ sessionInfo.operator.lastName }}</mat-list-item>
+            <mat-list-item><span class="bold-text">Started at:</span> {{ sessionInfo.startDate | amDateFormat: 'LLLL' }}</mat-list-item>
+            <mat-list-item><span class="bold-text">Finished at:</span> {{ (sessionInfo.endDate | amDateFormat: 'LLLL') || 'In progress' }}</mat-list-item>
+        </mat-list>
+        <div class="continue-button-container" *ngIf="continueButtonEnabled">
+            <button mat-raised-button [routerLink]="['/session', sessionInfo.id]" color="primary">Continue</button>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div>
+        <h3>Phases:</h3>
+        <app-session-phase *ngFor="let phase of sessionInfo.phases" [phase]="phase">
+        </app-session-phase>
+    </div>    
+</div>

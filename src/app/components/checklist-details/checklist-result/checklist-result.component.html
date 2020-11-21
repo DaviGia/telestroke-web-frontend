@@ -1,0 +1,27 @@
+<mat-card class="inner-card" *ngFor="let result of checklist.results;">
+    <mat-card-header>
+        <mat-card-title>
+            <span>{{result.name}}</span>
+        </mat-card-title>       
+        <mat-card-subtitle *ngIf="result.description">{{result.description}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-list matLine>
+            <mat-list-item>
+                <span class="bold-text">Strategy:</span>
+                {{ result.strategy }}
+            </mat-list-item>
+            <mat-list-item>
+                <span class="bold-text">Display format:</span>
+                {{ result.displayFormat }}
+            </mat-list-item>
+        </mat-list>
+        <mat-divider [inset]="true"></mat-divider>
+        <mat-expansion-panel class="expansion-panel">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Target fields</mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-checklist-result-fields [checklist]="checklist" [result]='result'></app-checklist-result-fields>
+        </mat-expansion-panel>
+    </mat-card-content>
+</mat-card>
