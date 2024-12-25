@@ -22,15 +22,15 @@ The web-app needs a single configuration file in `src/assets/config/config.json`
 
 ``` js
 {
-    "baseUrl": "http://localhost:8001/api", //gateway entrypoint
-    "peerjs": { //peerjs configuration
-        "host": "localhost",
-        "port": 9000,
-        "key": "demo", // change in production env   
-        "path": "/telestroke",
-        "secure": false, // change in production env 
-        "debug": 0
-    }
+  "baseUrl": "http://localhost:8001/api", //gateway entrypoint
+  "peerjs": { //peerjs configuration
+    "host": "localhost",
+    "port": 9000,
+    "key": "demo", // change in production env   
+    "path": "/telestroke",
+    "secure": false, // change in production env 
+    "debug": 0
+  }
 }
 ```
 

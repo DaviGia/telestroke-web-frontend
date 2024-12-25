@@ -1,6 +1,6 @@
 ## Build
 
-FROM node:12.2.0 as build
+FROM node:12.2.0 AS build
 
 # set working directory
 WORKDIR /app
@@ -9,7 +9,7 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 # install and cache app dependencies
-COPY package.json /app/package.json
+COPY package.json package-lock.json /app
 RUN npm install
 
 # add app
